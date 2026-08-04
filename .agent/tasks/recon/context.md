@@ -1,4 +1,43 @@
-# Contexte — ai-hirekit
+# Contexte — ai-hirekit (Équipe Guyane 🇬🇫)
+
+> **Construit avec Kimi** (kimi-k2.7-code:cloud) et **GLM** (glm-5.2:cloud) le 2026-08-03.
+> **Mis à jour** le 2026-08-04 — alignement Caraïbes + séparation équipes/projets.
+
+## Alignement Caraïbes
+
+Guyane fait partie du programme **AI Teams Caraïbes** — 3 équipes indépendantes
+qui partagent l'infrastructure mais gardent chacune son moteur et ses modèles.
+
+| Équipe | Repo équipe | Moteur | Projet | Repo projet |
+|---|---|---|---|---|
+| 🇨🇺 Cuba | `ai-team-cuba` | OpenHands | Todo | `todo-cuba` |
+| 🇭🇹 Haiti | `ai-team-haiti` | Hermes v0.19.0 | Todo | `todo-haiti` |
+| 🇬🇫 **Guyane** (cette équipe) | `ai-team-guyane` | Hermes v0.19.0 | ai-hirekit | `ai-hirekit` |
+
+### Membres de l'équipe Guyane
+
+| Rôle | Prénom | Profil Hermes | Modèle Ollama Cloud |
+|---|---|---|---|
+| Recon Agent | **Léopold** | `recon-bot` | `glm-5.2:cloud` |
+| Poster (4 sites) | **Manon** | `bjemploi/job2mada/asako/wabajob-poster` | 4 modèles A/B |
+| Review Agent | **Sylviane** | `review-bot` | `deepseek-v4-pro:cloud` |
+| Dev Agent | **Ludovic** | `dev-bot` | `kimi-k2.7-code:cloud` |
+| Lead Dev Agent | **Roseline** | `lead-dev-bot` | `deepseek-v4-pro:cloud` |
+
+### Séparation équipes/projets
+
+L'équipe Guyane vit dans `YoLoADR/ai-team-guyane` (skills, infra, docs, AGENTS.md).
+Le projet ai-hirekit vit dans `YoLoADR/ai-hirekit` (sites, job.md, workflows).
+Le workflow `guyane-loop.yml` est dans le repo projet et SSH vers VM 102.
+
+### Kanban motherboard
+
+Project V2 "AI Teams Motherboard" (GitHub Project #4) — https://github.com/users/YoLoADR/projects/4
+Champ custom `Équipe` : 🇨🇺 Cuba, 🇭🇹 Haiti, 🇬🇫 Guyane.
+
+### Telegram
+
+`/guyane_recon`, `/guyane_poster`, `/guyane_review` pour s'adresser à Guyane.
 
 ## Objectif
 
