@@ -104,15 +104,20 @@ APP_PRIVATE_KEY=<dans GitHub Secrets>
 Precision (100.111.21.3) → Proxmox
 └── VM 102 (192.168.1.76, user: hermes)
     ├── /home/hermes/.hermes/profiles/
-    │   ├── recon-bot/config.yaml       → glm-5.2:cloud
-    │   ├── bjemploi-poster/config.yaml  → kimi-k2.7-code:cloud
-    │   ├── job2mada-poster/config.yaml  → glm-5.2:cloud
-    │   ├── asako-poster/config.yaml     → minimax-m3:cloud
-    │   ├── wabajob-poster/config.yaml   → deepseek-v4-pro:cloud
-    │   ├── review-bot/config.yaml       → deepseek-v4-pro:cloud
-    │   ├── dev-bot/config.yaml          → kimi-k2.7-code:cloud
-    │   └── lead-dev-bot/config.yaml      → deepseek-v4-pro:cloud
-    └── /home/hermes/projects/ai-hirekit/  → repo clone
+    │   ├── guyane-recon-bot/config.yaml       → glm-5.2:cloud
+    │   ├── guyane-bjemploi-poster/config.yaml  → kimi-k2.7-code:cloud
+    │   ├── guyane-job2mada-poster/config.yaml  → glm-5.2:cloud
+    │   ├── guyane-asako-poster/config.yaml     → minimax-m3:cloud
+    │   ├── guyane-wabajob-poster/config.yaml   → deepseek-v4-pro:cloud
+    │   ├── guyane-review-bot/config.yaml       → deepseek-v4-pro:cloud
+    │   ├── guyane-dev-bot/config.yaml          → kimi-k2.7-code:cloud
+    │   └── guyane-lead-dev-bot/config.yaml      → deepseek-v4-pro:cloud
+    ├── /home/hermes/projects/ai-team-guyane/  → repo équipe (skills, infra, docs)
+    └── /home/hermes/projects/ai-hirekit/       → repo projet (sites, job.md)
+```
+
+**Note** : Les profils Guyane sont préfixés `guyane-` pour éviter les conflits
+avec les profils Haiti (`po-bot`, `dev-bot`, `lead-dev-bot`) sur la même VM 102.
 ```
 
 **Bug Hermes connu** : les profils corrompent leur config.yaml à chaque session
