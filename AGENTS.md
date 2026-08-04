@@ -1,4 +1,4 @@
-# AGENTS.md — Équipe Guyane (ai-hirekit)
+# AGENTS.md — Équipe Guyane (ai-team-guyane)
 
 > **Construit avec Kimi** (kimi-k2.7-code:cloud) et **GLM** (glm-5.2:cloud) via Ollama Cloud.
 
@@ -24,16 +24,21 @@ en testant 4 modèles LLM en A/B pour identifier le meilleur par site.
 ## Architecture
 
 ```
-ai-hirekit/
-├── .agent/tasks/recon/          # Suivi (pattern Merenza)
-├── .github/workflows/           # CI + Kanban + ai-loop (relay commentaires → agents)
-├── docs/                        # GITHUB_SETUP, TELEGRAM_SETUP, DELEGATION
-├── infra/hermes/                # config.yaml + profiles.yaml (8 profils)
-├── skills/                      # 6 skills Hermes (recon, poster, review, dev, lead)
-├── sites/<site>/                # RECON.md + cookies.json (gitignored)
-├── job.md                        # Offre d'emploi + comptes recruteurs
-├── docker-compose.yml           # 9 services Hermes (théorique)
-└── setup-github.sh              # Script setup GitHub (labels, Project V2)
+ai-team-guyane/                     ← Repo équipe (skills, infra, docs)
+├── AGENTS.md                       # Ce fichier
+├── .agent/tasks/recon/             # Suivi (pattern Merenza)
+├── docs/                           # GITHUB_SETUP, TELEGRAM_SETUP, DELEGATION, ARCHITECTURE
+├── infra/hermes/                   # config.yaml + profiles.yaml (8 profils)
+├── skills/                        # Skills Hermes (recon, poster, review, dev, lead)
+└── docker-compose.yml             # 9 services Hermes (théorique)
+
+ai-hirekit/                         ← Repo projet (séparé)
+├── .github/workflows/              # guyane-loop.yml + motherboard.yml + ci.yml
+├── .github/ISSUE_TEMPLATE/         # posting-task.yml, recon-task.yml
+├── sites/<site>/                   # RECON.md + cookies.json (gitignored)
+├── job.md                          # Offre d'emploi + comptes recruteurs
+├── README.md                       # Doc projet
+└── setup-github.sh                 # Script setup GitHub (labels, Project V2)
 ```
 
 ## Règles de l'équipe

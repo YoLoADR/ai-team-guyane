@@ -1,4 +1,7 @@
-# Plan d'Architecture — ai-hirekit
+# Plan d'Architecture — Équipe Guyane 🇬🇫 (ai-team-guyane)
+
+> **Mis à jour** le 2026-08-04 — alignement Caraïbes + séparation équipes/projets.
+> L'équipe Guyane travaille sur le projet `ai-hirekit` (repo séparé).
 
 ## 0. Raisonnement ayant mené à cette architecture
 
@@ -8,24 +11,23 @@ Yohann a une infrastructure existante avec 3 machines :
 - **Precision** (`100.111.21.3`) — serveur Proxmox avec 2 conteneurs LXC
 - **VM 102** (`ai-agents-vm`) — conteneur LXC sur Precision avec Hermes
 
-Le projet ai-team utilise déjà cette infra : un bot Telegram sur Contabo
-(`/opt/telegram-bot.py`) route les commandes vers VM 102 où 3 agents Hermes
-(po-bot, dev-bot, lead-dev-bot) travaillent sur le repo `YoLoADR/ai-team`.
+Le projet ai-team utilisait déjà cette infra : un bot Telegram sur Contabo
+(`/opt/telegram-bot.py`) route les commandes vers VM 102 où des agents Hermes
+travaillent sur le repo `YoLoADR/ai-team-cuba` (équipe Cuba).
 
 ### Pourquoi ne pas créer une nouvelle infra
-Créer un nouveau VPS pour ai-hirekit serait coûteux et inutile. L'infra
+Créer un nouveau VPS pour l'équipe Guyane serait coûteux et inutile. L'infra
 existante a la capacité d'accueillir des profils Hermes supplémentaires.
-La contrainte clé est **l'isolation** : ai-hirekit ne doit pas interférer
-avec ai-team.
+La contrainte clé est **l'isolation** : l'équipe Guyane ne doit pas interférer
+avec les équipes Cuba et Haiti.
 
 ### Solution choisie : profils séparés + routing par projet
 - **Même VM 102** pour les agents (pas de nouvelle machine)
-- **Profils Hermes séparés** : `hirekit-*` avec `cwd` pointant vers
-  `/home/hermes/projects/ai-hirekit/` (différent de `/home/hermes/repo/`
-  utilisé par ai-team)
+- **Profils Hermes séparés** : `recon-bot`, `*-poster`, `review-bot`, `dev-bot`,
+  `lead-dev-bot` avec `cwd` pointant vers `/home/hermes/projects/ai-hirekit/`
 - **Même bot Telegram** (`@loop_engineering_team_bot`) mais avec
-  commandes `/hirekit` qui routent vers les profils ai-hirekit
-- **Repos GitHub séparés** : `YoLoADR/ai-hirekit` ≠ `YoLoADR/ai-team`
+  commandes `/guyane_*` qui routent vers les profils Guyane
+- **Repos GitHub séparés** : `YoLoADR/ai-team-guyane` (équipe) ≠ `YoLoADR/ai-hirekit` (projet)
 
 ### Décisions clés et leurs raisons
 1. **Hermes > OpenHands** : browser toolset Playwright intégré (décisif
@@ -46,7 +48,8 @@ avec ai-team.
 
 Cette équipe et toute la documentation du projet ai-hirekit ont été
 **construites avec Kimi (kimi-k2.7-code) et GLM (glm-5.2)** via Ollama Cloud,
-lors d'une session unique le 2026-08-03 :
+lors d'une session unique le 2026-08-03. L'équipe a été extraite dans son propre
+repo `ai-team-guyane` le 2026-08-04 lors de l'alignement Caraïbes.
 - **GLM-5.2** : analyse, recon des 4 sites, rédaction de la documentation,
   routing Telegram, configuration Hermes
 - **Kimi-k2.7-code** : code, profils Hermes, docker-compose, scripts,

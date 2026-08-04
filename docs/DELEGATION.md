@@ -1,4 +1,8 @@
-# Délégation de développements — ai-hirekit
+# Délégation de développements — Équipe Guyane 🇬🇫 (ai-team-guyane)
+
+> **Mis à jour** le 2026-08-04 — l'équipe Guyane n'est pas limitée au posting
+> d'offres d'emploi. Elle peut aussi déléguer du développement sur le projet
+> `ai-hirekit` (ou tout autre projet assigné).
 
 ## Vue d'ensemble
 

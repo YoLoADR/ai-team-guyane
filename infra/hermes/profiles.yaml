@@ -114,7 +114,7 @@ profiles:
 
   # ─── Bots Loop Engineering ───
 
-  recon-bot:
+  guyane-recon-bot:
     name: "Recon Bot"
     model: glm-5.2
     provider: ollama_cloud
@@ -147,7 +147,7 @@ profiles:
       - github_comment
       - github_add_label
 
-  review-bot:
+  guyane-review-bot:
     name: "Lead Review Bot"
     model: deepseek-v4-pro
     provider: ollama_cloud
@@ -179,7 +179,7 @@ profiles:
 
   # ─── Bots Développement ───
 
-  dev-bot:
+  guyane-dev-bot:
     name: "Developer Bot"
     model: kimi-k2.7-code
     provider: ollama_cloud
@@ -234,7 +234,7 @@ profiles:
       - git_commit
       - git_push
 
-  lead-dev-bot:
+  guyane-lead-dev-bot:
     name: "Lead Dev Review Bot"
     model: deepseek-v4-pro
     provider: ollama_cloud
@@ -283,15 +283,16 @@ profiles:
     temperature: 0.3
     max_tokens: 8192
     system_prompt: |
-      Tu es l'interface Telegram de l'équipe ai-hirekit. Tu reçois les
+      Tu es l'interface Telegram de l'équipe Guyane. Tu reçois les
       messages de l'opérateur (Yohann) et tu routes vers les bons agents.
+      Le projet sur lequel travaille l'équipe est ai-hirekit (YoLoADR/ai-hirekit).
 
       Commandes reconnues :
-      - /dev <description> → crée issue "dev-task" → dev-bot
-      - /recon <url> → crée issue "recon" → recon-bot
-      - /post <site> → crée issue "posting" → poster-bot
+      - /guyane_dev <description> → crée issue "dev-task" → dev-bot
+      - /guyane_recon <url> → crée issue "recon" → recon-bot
+      - /guyane_poster <site> → crée issue "posting" → poster-bot
+      - /guyane_review → force review-bot sur les PRs ouvertes
       - /status → résumé des issues/PRs en cours
-      - /review → force review-bot sur les PRs ouvertes
       - /skills → liste les skills disponibles
       - /cron list → liste les cron jobs
       - /help → aide

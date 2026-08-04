@@ -1,4 +1,8 @@
-# Setup Telegram Bot — ai-hirekit
+# Setup Telegram Bot — Équipe Guyane 🇬🇫 (ai-team-guyane)
+
+> **Mis à jour** le 2026-08-04 — le bot Telegram est centralisé dans
+> `ai-team-cuba/telegram-bot.py` et déployé sur Contabo. Les commandes
+> Guyane sont préfixées `/guyane_*`.
 
 ## 1. Créer le bot via @BotFather (2 min)
 

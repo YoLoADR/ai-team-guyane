@@ -1,4 +1,7 @@
-# GitHub Configuration — ai-hirekit
+# GitHub Configuration — Équipe Guyane 🇬🇫 (projet: ai-hirekit)
+
+> **Mis à jour** le 2026-08-04 — l'équipe Guyane est dans `YoLoADR/ai-team-guyane`,
+> le projet est dans `YoLoADR/ai-hirekit`. Les profils Hermes travaillent sur le repo projet.
 
 ## 1. Repo GitHub
 
