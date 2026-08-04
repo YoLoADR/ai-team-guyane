@@ -6,7 +6,7 @@
 
 ## Vue d'ensemble
 
-L'équipe d'agents Hermes d'ai-hirekit n'est pas limitée au posting d'offres
+L'équipe Guyane n'est pas limitée au posting d'offres d'emploi sur ai-hirekit.
 d'emploi. Elle peut aussi **recevoir et implémenter des tâches de
 développement logiciel** déléguées par l'opérateur (Yohann).
 
