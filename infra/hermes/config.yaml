@@ -1,0 +1,21 @@
+providers:
+  ollama_cloud:
+    base_url: https://ollama.com/api/v1
+    api_key: ${OLLAMA_CLOUD_API_KEY}
+    api_type: openai
+
+settings:
+  default_provider: ollama_cloud
+  confirm_tool_execution: false
+  auto_approve: true
+  memory_enabled: false
+  loop_engineering: false
+
+toolsets:
+  - browser
+  - shell
+  - file
+
+logging:
+  level: info
+  file: ~/.hermes/logs/job-posting.log

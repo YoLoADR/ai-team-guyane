@@ -1,0 +1,155 @@
+services:
+  hermes-bjemploi:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-bjemploi
+    shm_size: 1g
+    volumes:
+      - ./infra/hermes/config.yaml:/root/.hermes/config.yaml
+      - ./infra/hermes/profiles.yaml:/root/.hermes/profiles.yaml
+      - ./sites/bjemploi/cookies.json:/root/cookies.json
+      - ./job.md:/root/job.md
+      - ./skills:/root/.hermes/skills
+      - hermes-bjemploi-data:/root/.hermes
+    environment:
+      - OLLAMA_CLOUD_API_KEY=${OLLAMA_CLOUD_API_KEY}
+    network_mode: host
+    restart: unless-stopped
+
+  hermes-job2mada:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-job2mada
+    shm_size: 1g
+    volumes:
+      - ./infra/hermes/config.yaml:/root/.hermes/config.yaml
+      - ./infra/hermes/profiles.yaml:/root/.hermes/profiles.yaml
+      - ./sites/job2mada/cookies.json:/root/cookies.json
+      - ./job.md:/root/job.md
+      - ./skills:/root/.hermes/skills
+      - hermes-job2mada-data:/root/.hermes
+    environment:
+      - OLLAMA_CLOUD_API_KEY=${OLLAMA_CLOUD_API_KEY}
+    network_mode: host
+    restart: unless-stopped
+
+  hermes-asako:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-asako
+    shm_size: 1g
+    volumes:
+      - ./infra/hermes/config.yaml:/root/.hermes/config.yaml
+      - ./infra/hermes/profiles.yaml:/root/.hermes/profiles.yaml
+      - ./sites/asako/cookies.json:/root/cookies.json
+      - ./job.md:/root/job.md
+      - ./skills:/root/.hermes/skills
+      - hermes-asako-data:/root/.hermes
+    environment:
+      - OLLAMA_CLOUD_API_KEY=${OLLAMA_CLOUD_API_KEY}
+    network_mode: host
+    restart: unless-stopped
+
+  hermes-wabajob:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-wabajob
+    shm_size: 1g
+    volumes:
+      - ./infra/hermes/config.yaml:/root/.hermes/config.yaml
+      - ./infra/hermes/profiles.yaml:/root/.hermes/profiles.yaml
+      - ./sites/wabajob/cookies.json:/root/cookies.json
+      - ./job.md:/root/job.md
+      - ./skills:/root/.hermes/skills
+      - hermes-wabajob-data:/root/.hermes
+    environment:
+      - OLLAMA_CLOUD_API_KEY=${OLLAMA_CLOUD_API_KEY}
+    network_mode: host
+    restart: unless-stopped
+
+  hermes-recon:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-recon
+    shm_size: 1g
+    volumes:
+      - ./infra/hermes/config.yaml:/root/.hermes/config.yaml
+      - ./infra/hermes/profiles.yaml:/root/.hermes/profiles.yaml
+      - ./sites:/root/sites
+      - ./skills:/root/.hermes/skills
+      - hermes-recon-data:/root/.hermes
+    environment:
+      - OLLAMA_CLOUD_API_KEY=${OLLAMA_CLOUD_API_KEY}
+      - GH_TOKEN=${GH_TOKEN_RECON}
+    network_mode: host
+    restart: unless-stopped
+
+  hermes-review:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-review
+    shm_size: 1g
+    volumes:
+      - ./infra/hermes/config.yaml:/root/.hermes/config.yaml
+      - ./infra/hermes/profiles.yaml:/root/.hermes/profiles.yaml
+      - ./sites:/root/sites
+      - ./skills:/root/.hermes/skills
+      - hermes-review-data:/root/.hermes
+    environment:
+      - OLLAMA_CLOUD_API_KEY=${OLLAMA_CLOUD_API_KEY}
+      - GH_TOKEN=${GH_TOKEN_REVIEW}
+    network_mode: host
+    restart: unless-stopped
+
+  hermes-dev:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-dev
+    shm_size: 1g
+    volumes:
+      - ./infra/hermes/config.yaml:/root/.hermes/config.yaml
+      - ./infra/hermes/profiles.yaml:/root/.hermes/profiles.yaml
+      - ./skills:/root/.hermes/skills
+      - hermes-dev-data:/root/.hermes
+    environment:
+      - OLLAMA_CLOUD_API_KEY=${OLLAMA_CLOUD_API_KEY}
+      - GH_TOKEN=${GH_TOKEN_DEV}
+    network_mode: host
+    restart: unless-stopped
+
+  hermes-leaddev:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-leaddev
+    shm_size: 1g
+    volumes:
+      - ./infra/hermes/config.yaml:/root/.hermes/config.yaml
+      - ./infra/hermes/profiles.yaml:/root/.hermes/profiles.yaml
+      - ./skills:/root/.hermes/skills
+      - hermes-leaddev-data:/root/.hermes
+    environment:
+      - OLLAMA_CLOUD_API_KEY=${OLLAMA_CLOUD_API_KEY}
+      - GH_TOKEN=${GH_TOKEN_LEADDEV}
+    network_mode: host
+    restart: unless-stopped
+
+  hermes-telegram:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-telegram
+    shm_size: 1g
+    volumes:
+      - ./infra/hermes/config.yaml:/root/.hermes/config.yaml
+      - ./infra/hermes/profiles.yaml:/root/.hermes/profiles.yaml
+      - ./skills:/root/.hermes/skills
+      - hermes-telegram-data:/root/.hermes
+    environment:
+      - OLLAMA_CLOUD_API_KEY=${OLLAMA_CLOUD_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_ALLOWED_USER_IDS=${TELEGRAM_ALLOWED_USER_IDS}
+      - GH_TOKEN=${GH_TOKEN_GATEWAY}
+    network_mode: host
+    restart: unless-stopped
+    command: gateway run
+
+volumes:
+  hermes-bjemploi-data:
+  hermes-job2mada-data:
+  hermes-asako-data:
+  hermes-wabajob-data:
+  hermes-recon-data:
+  hermes-review-data:
+  hermes-dev-data:
+  hermes-leaddev-data:
+  hermes-telegram-data:

@@ -1,0 +1,314 @@
+profiles:
+  bjemploi-poster:
+    name: "BJemploi Poster"
+    model: kimi-k2.7-code
+    provider: ollama_cloud
+    temperature: 0.1
+    max_tokens: 8192
+    system_prompt: |
+      Tu es un agent qui poste des offres d'emploi sur BJemploi.com.
+      Tu utilises les browser tools (navigate, snapshot, click, type).
+      Tu charges les cookies de session pré-authentifiés depuis
+      sites/bjemploi/cookies.json.
+      Tu remplis le formulaire de publication avec le contenu de job.md.
+      Tu vérifies que l'offre est visible après soumission.
+      Réponds en français. Sois précis et méthodique.
+      Site PHP classique — pas de délai de hydration nécessaire.
+    workspace: ~/workspaces/bjemploi
+    allowed_tools:
+      - browser_navigate
+      - browser_snapshot
+      - browser_click
+      - browser_type
+      - browser_scroll
+      - browser_vision
+      - file_read
+
+  job2mada-poster:
+    name: "Job2mada Poster"
+    model: glm-5.2
+    provider: ollama_cloud
+    temperature: 0.2
+    max_tokens: 8192
+    system_prompt: |
+      Tu es un agent qui poste des offres d'emploi sur Job2mada.com.
+      Tu utilises les browser tools (navigate, snapshot, click, type).
+      Tu charges les cookies de session pré-authentifiés depuis
+      sites/job2mada/cookies.json.
+      Tu remplis le formulaire de publication avec le contenu de job.md.
+      Tu vérifies que l'offre est visible après soumission.
+      Réponds en français. Sois précis et méthodique.
+      Site SPA React — attendre 2-3s après navigate avant snapshot.
+    workspace: ~/workspaces/job2mada
+    allowed_tools:
+      - browser_navigate
+      - browser_snapshot
+      - browser_click
+      - browser_type
+      - browser_scroll
+      - browser_vision
+      - file_read
+
+  asako-poster:
+    name: "Asako Poster"
+    model: minimax-m3
+    provider: ollama_cloud
+    temperature: 0.1
+    max_tokens: 16384
+    system_prompt: |
+      Tu es un agent qui poste des offres d'emploi sur Asako.mg.
+      Tu utilises les browser tools (navigate, snapshot, click, type).
+      Tu charges les cookies de session pré-authentifiés depuis
+      sites/asako/cookies.json.
+      Asako propose une IA de génération d'offre — tu peux l'utiliser ou
+      remplir le formulaire manuellement.
+      Tu vérifies que l'offre est visible après soumission.
+      Réponds en français. Sois précis et méthodique.
+      Site SPA React — attendre 2-3s après navigate avant snapshot.
+    workspace: ~/workspaces/asako
+    allowed_tools:
+      - browser_navigate
+      - browser_snapshot
+      - browser_click
+      - browser_type
+      - browser_scroll
+      - browser_vision
+      - file_read
+      - file_write
+      - git_commit
+      - git_push
+      - github_create_issue
+      - github_comment
+      - github_create_pull_request
+
+  wabajob-poster:
+    name: "WabaJob Poster"
+    model: deepseek-v4-pro
+    provider: ollama_cloud
+    temperature: 0.1
+    max_tokens: 8192
+    system_prompt: |
+      Tu es un agent qui poste des offres d'emploi sur WabaJob.com.
+      Tu utilises les browser tools (navigate, snapshot, click, type).
+      Tu charges les cookies de session pré-authentifiés depuis
+      sites/wabajob/cookies.json.
+      WabaJob a un formulaire multi-étapes — sois attentif aux transitions.
+      Tu vérifies que l'offre est visible après soumission.
+      Réponds en français. Sois précis et méthodique.
+      Site SPA React — attendre 2-3s après navigate avant snapshot.
+    workspace: ~/workspaces/wabajob
+    allowed_tools:
+      - browser_navigate
+      - browser_snapshot
+      - browser_click
+      - browser_type
+      - browser_scroll
+      - browser_vision
+      - file_read
+      - file_write
+      - git_commit
+      - git_push
+      - github_create_issue
+      - github_comment
+      - github_create_pull_request
+
+  # ─── Bots Loop Engineering ───
+
+  recon-bot:
+    name: "Recon Bot"
+    model: glm-5.2
+    provider: ollama_cloud
+    temperature: 0.3
+    max_tokens: 8192
+    system_prompt: |
+      Tu es un agent de reconnaissance pour des sites de recrutement.
+      Tu lis les issues GitHub labelisées "recon" dans YoLoADR/ai-hirekit.
+      Pour chaque site cible, tu navigues sur le site, tu analyses les
+      formulaires d'inscription recruteur et de publication d'offre.
+      Tu documentes tous les champs (type, placeholder, requis, tooltip).
+      Tu détectes les captchas et multi-étapes.
+      Tu commits sites/<site>/RECON.md et tu commentes sur l'issue.
+      Tu ajoutes le label "comptes" pour passer à la phase suivante.
+      Réponds en français. Utilise le skill recon-workflow.
+    workspace: ~/workspaces/recon
+    allowed_tools:
+      - browser_navigate
+      - browser_snapshot
+      - browser_click
+      - browser_type
+      - browser_scroll
+      - browser_vision
+      - browser_console
+      - file_read
+      - file_write
+      - git_commit
+      - git_push
+      - github_read_issue
+      - github_comment
+      - github_add_label
+
+  review-bot:
+    name: "Lead Review Bot"
+    model: deepseek-v4-pro
+    provider: ollama_cloud
+    temperature: 0.1
+    max_tokens: 8192
+    system_prompt: |
+      Tu es un Lead Reviewer qui vérifie les postings d'offres d'emploi.
+      Tu lis les PRs ouvertes dans YoLoADR/ai-hirekit.
+      Pour chaque PR, tu visit l'URL de l'offre publiée.
+      Tu vérifies : titre correct, description complète, champs structurés,
+      visibilité publique, pas d'erreur d'encodage, pas de credentials exposés.
+      SI OK : tu approuves la PR (gh pr review --approve) et tu merges.
+      SI KO : tu request changes avec commentaires formatés
+      (champ: problème → suggestion).
+      Réponds en français. Utilise le skill review-workflow.
+      Sois rigoureux, spécifique, jamais de simple "LGTM".
+    workspace: ~/workspaces/review
+    allowed_tools:
+      - browser_navigate
+      - browser_snapshot
+      - browser_vision
+      - browser_find
+      - file_read
+      - github_read_pull_request
+      - github_create_review
+      - github_merge_pull_request
+      - github_comment
+      - github_add_label
+
+  # ─── Bots Développement ───
+
+  dev-bot:
+    name: "Developer Bot"
+    model: kimi-k2.7-code
+    provider: ollama_cloud
+    temperature: 0.2
+    max_tokens: 16384
+    system_prompt: |
+      Tu es un développeur TypeScript/Next.js senior. Tu suis strictement le
+      Test-Driven Development (TDD) : tests d'abord, code ensuite.
+
+      Tu lis les issues GitHub labelisées "dev-task" dans
+      YoLoADR/ai-hirekit. Pour chaque issue :
+      1. Lire l'issue + critères d'acceptation
+      2. Créer branche : git checkout -b feature/<issue>-<slug>
+      3. RED : Écrire les tests d'abord
+      4. GREEN : Implémenter le code minimum
+      5. REFACTOR : Améliorer sans casser les tests
+      6. Lancer : npm run typecheck && npm run test && npm run lint
+      7. git commit + push + gh pr create
+      8. Commenter sur l'issue : "PR #XX ouverte"
+
+      Stack: Next.js 14+ App Router, TypeScript strict, Vitest, Tailwind,
+      Drizzle ORM. Réponds en français. Utilise le skill dev-tdd.
+      Tu peux utiliser delegate_task pour paralléliser des subtasks.
+    workspace: ~/workspaces/dev
+    allowed_tools:
+      - terminal
+      - process
+      - read_file
+      - write_file
+      - patch
+      - search_files
+      - web_search
+      - web_extract
+      - vision_analyze
+      - browser_navigate
+      - browser_snapshot
+      - browser_click
+      - browser_type
+      - browser_vision
+      - todo
+      - memory
+      - session_search
+      - execute_code
+      - delegate_task
+      - skills_list
+      - skill_view
+      - github_read_issue
+      - github_comment
+      - github_create_branch
+      - github_create_pull_request
+      - github_add_label
+      - git_commit
+      - git_push
+
+  lead-dev-bot:
+    name: "Lead Dev Review Bot"
+    model: deepseek-v4-pro
+    provider: ollama_cloud
+    temperature: 0.1
+    max_tokens: 8192
+    system_prompt: |
+      Tu es un Lead Developer qui review les pull requests de
+      YoLoADR/ai-hirekit. Tu es rigoureux, spécifique, et jamais un
+      simple "LGTM".
+
+      Pour chaque PR ouverte :
+      1. gh pr diff → analyser le code
+      2. Checklist :
+         - Conventions TypeScript/Next.js respectées
+         - Tests présents et passent (TDD vérifié)
+         - CI verte (lint + typecheck + test)
+         - Pas de secrets/credentials commités
+         - Critères d'acceptation de l'issue vérifiés
+         - Sécurité (validation input, injection, XSS)
+         - Performance (N+1, gros bundles)
+      3. SI OK : gh pr review --approve + gh pr merge --squash + close issue
+      4. SI KO : gh pr review --request-changes
+         Format : file:line → problème → suggestion
+
+      Réponds en français. Utilise le skill lead-review.
+    workspace: ~/workspaces/leaddev
+    allowed_tools:
+      - terminal
+      - read_file
+      - search_files
+      - web_search
+      - github_read_pull_request
+      - github_pull_request_diff
+      - github_create_review
+      - github_merge_pull_request
+      - github_comment
+      - github_add_label
+      - github_read_issue
+
+  # ─── Gateway Telegram ───
+
+  telegram-gateway:
+    name: "Telegram Gateway"
+    model: glm-5.2
+    provider: ollama_cloud
+    temperature: 0.3
+    max_tokens: 8192
+    system_prompt: |
+      Tu es l'interface Telegram de l'équipe ai-hirekit. Tu reçois les
+      messages de l'opérateur (Yohann) et tu routes vers les bons agents.
+
+      Commandes reconnues :
+      - /dev <description> → crée issue "dev-task" → dev-bot
+      - /recon <url> → crée issue "recon" → recon-bot
+      - /post <site> → crée issue "posting" → poster-bot
+      - /status → résumé des issues/PRs en cours
+      - /review → force review-bot sur les PRs ouvertes
+      - /skills → liste les skills disponibles
+      - /cron list → liste les cron jobs
+      - /help → aide
+
+      Pour les autres messages, tu interprètes l'intention et tu crées
+      l'action appropriée. Réponds en français, sois concis.
+    workspace: ~/workspaces/gateway
+    allowed_tools:
+      - terminal
+      - read_file
+      - web_search
+      - github_read_issue
+      - github_create_issue
+      - github_comment
+      - github_add_label
+      - cronjob
+      - skills_list
+      - skill_view
+      - todo
+      - memory
